@@ -1,18 +1,32 @@
 let computerSelection;
-let humanSelection;
+let humanSelection='';
 let computerScore;
 let playerScore;
 
+
 function getcomputerSelection() {
+    console.log(1);
     const arr = ["rock", "paper", "scissors"];
     const random = Math.floor(Math.random() * 3);
     
     return arr[random];
 }
 
+function gethumanSelection() {
+    console.log(2);
+    const choices = document.querySelectorAll('.choices');
+    choices.forEach(choice => choice.addEventListener('click', function(e){
+        humanSelection = this.getAttribute('data-value');
+        console.log('human selection = ', humanSelection);
+        console.log(playRound(humanSelection, computerSelection));
+        return;
+    }))
+}
+
 game();
 
 function game() {
+    console.log("game");
     computerScore = 0;
     playerScore = 0;
     
@@ -36,22 +50,14 @@ function game() {
     }
 }
 
-function gethumanSelection() {
-    humanSelection = prompt("Please choose between: 1)🪨 2)📄 3)✂️");
-    if ((humanSelection.toLowerCase() == "rock") || (humanSelection.toLowerCase() == "paper") || (humanSelection.toLowerCase() == "scissors")) {
-        console.log("Game on!!!😤");
-        console.log(computerSelection);
-        console.log(playRound(humanSelection,computerSelection));
-    } else {
-        alert("invalid input.");
-        gethumanSelection();
-    }
-}
+
 
 function playRound(playerSelection, computerSelection) {
+    console.log("playRound");
     computerSelection = getcomputerSelection().toLowerCase();
     playerSelection = humanSelection.toLowerCase();
-    console.log(computerSelection);
+    console.log('computer selection = ',computerSelection);
+    
     if (computerSelection==playerSelection) {
         alert('Tie game!');
         return 'Tie game\nComputer Score: ' + 
